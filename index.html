@@ -50,7 +50,6 @@
       padding: 0 clamp(24px, 6vw, 100px);
       z-index: 10;
     }
-
     .masthead-top {
       display: flex;
       justify-content: space-between;
@@ -73,7 +72,6 @@
       gap: 40px;
       align-items: end;
     }
-
     .eyebrow {
       font-family: 'DM Mono', monospace;
       font-size: 11px;
@@ -107,7 +105,6 @@
       margin-top: 18px;
       line-height: 1.4;
     }
-
     .hero-statement {
       font-size: 16px;
       line-height: 1.8;
@@ -117,7 +114,6 @@
       padding-left: 24px;
       margin-bottom: 32px;
     }
-
     .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
 
     .btn {
@@ -238,9 +234,9 @@
       color: var(--gold);
     }
 
-    /* ── HOW I WORK ── */
-    .principles { margin: 80px 0; }
-    .principles-grid {
+    /* ── HOW I THINK ── */
+    .thinking { margin: 80px 0; }
+    .thinking-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 2px;
@@ -268,6 +264,126 @@
       line-height: 1.2;
     }
     .principle p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* ── CASE STUDIES ── */
+    .case-studies { margin: 80px 0; }
+
+    .cs-card {
+      border: 1px solid var(--navy-line);
+      margin-bottom: 1px;
+      background: var(--navy-card);
+      transition: background 0.3s;
+    }
+    .cs-card:hover { background: var(--navy-mid); }
+
+    .cs-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      padding: 36px 40px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .cs-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .cs-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold-dim);
+      padding: 3px 10px;
+    }
+    .cs-company {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .cs-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .cs-summary {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 680px;
+    }
+    .cs-toggle {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--navy-line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .cs-toggle svg {
+      transition: transform 0.3s;
+      stroke: var(--gold);
+    }
+    .cs-card.open .cs-toggle { border-color: var(--gold); background: var(--gold); }
+    .cs-card.open .cs-toggle svg { transform: rotate(45deg); stroke: var(--navy); }
+
+    /* ── CASE STUDY BODY ── */
+    .cs-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+    }
+    .cs-body-inner {
+      padding: 0 40px 48px;
+      border-top: 1px solid var(--navy-line);
+    }
+
+    .cs-section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 32px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cs-section-label::before { content: ''; display: block; width: 16px; height: 1px; background: var(--gold); }
+
+    .cs-text {
+      font-size: 15px;
+      color: var(--cream);
+      opacity: 0.82;
+      line-height: 1.85;
+      max-width: 720px;
+    }
+    .cs-text + .cs-text { margin-top: 14px; }
+
+    .cs-highlight {
+      background: var(--navy-mid);
+      border-left: 2px solid var(--gold);
+      padding: 20px 24px;
+      margin: 24px 0;
+      font-size: 15px;
+      color: var(--cream);
+      line-height: 1.7;
+      font-style: italic;
+      max-width: 720px;
+    }
 
     /* ── EXPERIENCE ── */
     .experience { margin: 80px 0; }
@@ -397,13 +513,15 @@
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; gap: 32px; }
       .impact { grid-template-columns: repeat(2, 1fr); }
-      .principles-grid { grid-template-columns: 1fr; }
+      .thinking-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
       .exp-item { grid-template-columns: 1fr; gap: 8px; }
+      .cs-header { grid-template-columns: 1fr auto; }
     }
     @media (max-width: 600px) {
       .impact { grid-template-columns: 1fr 1fr; }
       .masthead-top .loc { display: none; }
+      .cs-body-inner { padding: 0 24px 36px; }
     }
   </style>
 </head>
@@ -427,7 +545,7 @@
       </p>
       <div class="hero-cta">
         <a href="#contact" class="btn btn-primary">Get in touch</a>
-        <a href="Timothy_Miller_CV_2026.pdf" class="btn btn-secondary" download>Download CV</a>
+        <a href="Timothy_Miller_CV_ATS.docx" class="btn btn-secondary" download>Download CV</a>
       </div>
     </div>
   </div>
@@ -450,7 +568,7 @@
     </div>
     <div class="impact-card">
       <div class="impact-number"><em>20</em>+</div>
-      <div class="impact-label">Enterprise customers on BYOD — bringing proprietary data into SessionM for custom audience targeting</div>
+      <div class="impact-label">Enterprise customers on BYOD — proprietary data onboarding for custom audience targeting</div>
     </div>
     <div class="impact-card">
       <div class="impact-number"><em>80</em>%</div>
@@ -462,32 +580,164 @@
     </div>
   </section>
 
-  <!-- HOW I WORK -->
-  <section class="principles">
+  <!-- HOW I THINK -->
+  <section class="thinking">
     <div class="section-header">
       <span class="section-number">01</span>
-      <h2>How I work</h2>
+      <h2>How I think</h2>
     </div>
-    <div class="principles-grid">
+    <div class="thinking-grid">
       <div class="principle">
         <div class="principle-number">— 01</div>
-        <h3>Bridge architecture and boardroom</h3>
-        <p>I translate complex architectural concepts — Lakehouse, Medallion, real-time vs. batch trade-offs — into clear business value for SVPs, while articulating the "why" to engineering teams to ensure roadmap alignment and execution.</p>
+        <h3>Understand before you push back</h3>
+        <p>My default when entering a new team or a difficult relationship is to listen first. I'm trying to understand the technical reality, the history, and what's driving someone's position before forming a view. Most resistance has a reason behind it. Finding that reason is usually more useful than trying to overcome it.</p>
       </div>
       <div class="principle">
         <div class="principle-number">— 02</div>
-        <h3>Pull in the right experts, then decide</h3>
-        <p>I don't pretend to have all the answers. I know which questions to ask, who to bring into the room, and how to synthesise expert input into a confident, timely decision that keeps teams moving.</p>
+        <h3>The platform is a commercial asset, not infrastructure</h3>
+        <p>Data platforms get treated as back-end plumbing. I treat them as product. Every architectural decision has a cost, a trade-off, and a downstream commercial consequence. When making roadmap decisions I'm always asking: what does this unlock for customers, and what does it cost us to maintain?</p>
       </div>
       <div class="principle">
         <div class="principle-number">— 03</div>
-        <h3>Ruthless prioritisation under pressure</h3>
-        <p>When business conditions shift — acquisitions, restructures, pipeline changes — I reshuffle fast and keep teams focused on what actually moves the needle, not what was on last quarter's roadmap.</p>
+        <h3>Start minimal, let usage tell you what to build next</h3>
+        <p>I have a strong bias toward shipping something smaller sooner over designing something comprehensive later. Not because I don't value rigour — but because the best requirements come from real usage, not planning sessions. The semantic data layer and BYOD both started small. In both cases the right expansion became obvious once people were actually using it.</p>
       </div>
       <div class="principle">
         <div class="principle-number">— 04</div>
-        <h3>Turn data platforms into commercial wins</h3>
-        <p>From BYOD adoption to new customer wins to $1M in cost savings — I treat the data platform not as infrastructure but as a commercial asset, and manage it accordingly.</p>
+        <h3>Pull in the right people, then decide</h3>
+        <p>I'm not the smartest person in every room and I don't try to be. What I am good at is knowing which room I need to be in, and who needs to be in it with me. When facing a decision I don't have full context on — technical, commercial, or organisational — I'd rather take an extra day to get the right people around the problem than move fast in the wrong direction.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section class="case-studies">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2>Case studies</h2>
+    </div>
+
+    <!-- CASE STUDY 1: BYOD -->
+    <div class="cs-card" id="cs1">
+      <div class="cs-header" onclick="toggleCS('cs1')">
+        <div>
+          <div class="cs-meta">
+            <span class="cs-tag">Commercial Product</span>
+            <span class="cs-company">Mastercard · SessionM</span>
+          </div>
+          <div class="cs-title">Productising BYOD — From Shadow Process to Governed Platform Capability</div>
+          <div class="cs-summary">How I took an informal, ungoverned data workaround and turned it into a compliant, self-serve product capability adopted by 20+ enterprise customers.</div>
+        </div>
+        <div class="cs-toggle">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="2">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </div>
+      </div>
+      <div class="cs-body">
+        <div class="cs-body-inner">
+          <div class="cs-section-label">The Problem</div>
+          <p class="cs-text">Enterprise customers on SessionM wanted to enrich their loyalty and campaign data with proprietary data from their own ecosystem — data from their other apps, clickstream behaviour, user-specific attributes. The demand was real and legitimate. The problem was how it was being met.</p>
+          <p class="cs-text">External data was already flowing into the platform through S3 — but informally, inconsistently, and with no governance whatsoever. Different customers were doing it differently. There was no audit trail, no compliance controls, no data contracts, and no standardised onboarding process. Legal and compliance had no visibility into what external data was entering the platform or how.</p>
+
+          <div class="cs-section-label">What I Decided</div>
+          <p class="cs-text">The instinct might have been to shut it down until something proper was built. That would have been the wrong call — customers were relying on it and sales was actively using the capability in conversations with prospects. The right move was to productise it: take what was already happening, understand it properly, and build it into something governed, scalable, and sellable.</p>
+          <p class="cs-text">The hardest design challenge was the tension between flexibility and standardisation. Customers had 23 different external data source types between them — each with their own formats, schemas, and ingestion requirements. Engineering needed standardisation to build something sustainable. Customers needed flexibility to bring in data that didn't conform to a single template.</p>
+
+          <div class="cs-section-label">How I Approached It</div>
+          <p class="cs-text">I designed an end-to-end data onboarding process in collaboration with integration engineers and data engineers — covering ingestion frequency, data classification, retention policies, audit logging, and access controls. Critically, I introduced a data contract for each customer onboarding external data: a formal agreement defining the structure, format, and quality standards their data needed to meet before entering the platform.</p>
+          <div class="cs-highlight">Compliance and legal requirements were built into the ingestion framework from the start rather than bolted on afterwards. The goal was a product that customers experienced as flexible and self-serve, but that engineering and compliance experienced as controlled and maintainable.</div>
+
+          <div class="cs-section-label">What It Unlocked</div>
+          <p class="cs-text">BYOD was adopted by 20+ enterprise customers across 23 external data source buckets. Customers could onboard their own data independently, without routing requests through engineering. Sales could present it as a formal, governed product capability rather than a bespoke arrangement. And for the first time, compliance had full visibility and control over what external data was entering the platform.</p>
+          <p class="cs-text">The work received recognition from both the Head of Engineering and Head of Customer Delivery — an acknowledgement that it had solved a real problem for the business, not just the technical teams.</p>
+
+          <div class="cs-section-label">What I Learned</div>
+          <p class="cs-text">The most valuable product work isn't always building something new. Sometimes it's looking at what's already happening informally — the workarounds, the shadow processes, the things people are doing because there's no proper solution — and turning that into something real. Those are often the highest-ROI opportunities on a roadmap because the demand is already proven. The only question is whether you can make it safe and scalable enough to own it properly.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE STUDY 2: Product/Engineering Relationship -->
+    <div class="cs-card" id="cs2">
+      <div class="cs-header" onclick="toggleCS('cs2')">
+        <div>
+          <div class="cs-meta">
+            <span class="cs-tag">Leadership</span>
+            <span class="cs-company">Mastercard · SessionM</span>
+          </div>
+          <div class="cs-title">Rebuilding Trust Between Product and Engineering</div>
+          <div class="cs-summary">How I inherited a broken product/engineering dynamic, won over a resistant Director of Data Engineering, and turned a dysfunctional relationship into a high-performing one.</div>
+        </div>
+        <div class="cs-toggle">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="2">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </div>
+      </div>
+      <div class="cs-body">
+        <div class="cs-body-inner">
+          <div class="cs-section-label">The Problem</div>
+          <p class="cs-text">When I took over as the primary product manager for the data engineering team, the relationship between product and engineering was broken in both directions. Product was throwing requirements over the wall. Engineering was ignoring decisions they disagreed with and building what they wanted. And sitting at the centre of it was the Director of Data Engineering — who also led the team day-to-day — who had been burned by previous product managers and had largely stopped believing the function added value.</p>
+          <div class="cs-highlight">The honest picture is that product management had genuinely failed this team before I arrived. Requirements were poor, follow-through was inconsistent, and the engineering team had learned — reasonably — not to trust what product told them. The Director of Data Engineering was a genuinely difficult character, but his skepticism wasn't irrational given what he'd experienced.</div>
+          <p class="cs-text">When the most senior person on the engineering side is skeptical of product management, the whole team takes their cue from that. It wasn't just a personal dynamic. It was the operating culture.</p>
+
+          <div class="cs-section-label">What I Did</div>
+          <p class="cs-text">I didn't start with process changes or new frameworks. I started with conversations — 1-1s where I listened far more than I talked. I wanted to understand what had gone wrong before me, what he actually needed from a product manager, and where the technical complexity was that previous PMs had failed to appreciate.</p>
+          <p class="cs-text">The goal wasn't to win an argument. It was to understand his reality well enough that when I did push back — and I did push back — it came from a place of genuine understanding rather than ignorance dressed up as authority.</p>
+          <p class="cs-text">Over the following months I invested time in the technical architecture, brought him into roadmap decisions before conclusions were reached rather than after, and was consistent about following through on what I said I would do. No surprises. No requirements that landed without context.</p>
+
+          <div class="cs-section-label">The Turning Point</div>
+          <p class="cs-text">The shift was gradual, then suddenly obvious. The escalations stopped. Problems that would previously have been routed around me — taken directly to senior stakeholders to force a decision — started coming to me instead. He began solving things with me rather than around me. That's when I knew the relationship had genuinely changed.</p>
+
+          <div class="cs-section-label">The Impact</div>
+          <p class="cs-text">Once the dynamic between us shifted, the broader team followed. Engineering started contributing ideas in planning sessions rather than just estimating tasks handed to them. Product decisions were respected and implemented as intended. The atmosphere changed — collaboration replaced friction. And the escalations to senior stakeholders about product management stopped entirely.</p>
+
+          <div class="cs-section-label">What I Learned</div>
+          <p class="cs-text">When you inherit a broken relationship, the history isn't your fault but the repair is your responsibility. Investing time in understanding someone's technical concerns before pushing back, being consistent, delivering on what you say — these aren't extraordinary things. But in a context where the bar had been set so low, doing the basics well was enough to shift the dynamic entirely.</p>
+          <p class="cs-text">That takes longer than fixing a process. But it lasts longer too.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE STUDY 3: Semantic Data Layer -->
+    <div class="cs-card" id="cs3">
+      <div class="cs-header" onclick="toggleCS('cs3')">
+        <div>
+          <div class="cs-meta">
+            <span class="cs-tag">Platform Strategy</span>
+            <span class="cs-company">Mastercard · SessionM</span>
+          </div>
+          <div class="cs-title">Building a Semantic Data Layer — Alignment, Cost Trade-offs &amp; Stakeholder Pressure</div>
+          <div class="cs-summary">How I navigated a fractured stakeholder dynamic, pushed back on a costly real-time demand using user research, and got a contentious decision approved — by getting structured when the room got loud.</div>
+        </div>
+        <div class="cs-toggle">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="2">
+            <line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/>
+          </svg>
+        </div>
+      </div>
+      <div class="cs-body">
+        <div class="cs-body-inner">
+          <div class="cs-section-label">The Problem</div>
+          <p class="cs-text">SessionM's data platform had no semantic layer. Teams queried raw and staging data directly, each interpreting the same tables differently. Conflicting numbers, eroding trust, and a constant stream of ad hoc data requests to engineering that should never have reached them. Analytics couldn't self-serve. The problem was visible to anyone paying attention across team conversations — but nobody had named it as a single thing to fix.</p>
+          <p class="cs-text">I identified it, made the case, and took ownership of defining and building it.</p>
+
+          <div class="cs-section-label">The Real Challenge — Alignment, Not Architecture</div>
+          <p class="cs-text">The technical work was manageable. The hard part was driving alignment between the people who needed to agree on what the semantic layer should actually do.</p>
+          <p class="cs-text">Our Director of Product and our Data Architect were not understanding each other. The Director had a habit of using imprecise language, changing requirements between sessions, and being the loudest voice in the room — which created significant pressure on the Architect and made it difficult to reach stable decisions. The most contentious issue was a demand for real-time data. As a requirement for a layer that needed to aggregate certain fields, real-time would have been technically complex and commercially irresponsible — the cost implications were significant.</p>
+          <div class="cs-highlight">Rather than let the loudest voice win, I worked closely with the Architect to develop several options for product leadership — each with clearly documented trade-offs, refresh frequencies, aggregation scope, and cost implications. The goal was to take the conversation out of the realm of opinion and into the realm of evidence.</div>
+
+          <div class="cs-section-label">The Decision</div>
+          <p class="cs-text">I also went back to users. The demand for real-time data was coming through loudly, but when I conducted user interviews I struggled to uncover concrete use cases that justified it. Customers were asking for real-time without fully understanding what it meant or what they'd do with it differently. That's a pattern worth taking seriously — stated preferences and actual needs are not always the same thing.</p>
+          <p class="cs-text">Armed with the options analysis and the user research findings, I pushed for a 1-hour refresh cycle with aggregations kept deliberately limited to only what was strictly needed. It was approved by product leadership.</p>
+
+          <div class="cs-section-label">Where It Landed</div>
+          <p class="cs-text">Delivery was still in progress when Capillary Technologies acquired SessionM. The MVP was defined, the approach was agreed, and the build was underway. I had planned to track adoption by analysing query counts against the semantic layer over time — a simple but reliable signal of whether teams were actually using it or reverting to raw data.</p>
+
+          <div class="cs-section-label">What I Learned</div>
+          <p class="cs-text">The most valuable thing I did on this project wasn't the product definition — it was acting as a translation layer between a Data Architect under pressure and a Director of Product creating that pressure. Getting technically precise people and strategically-minded people into genuine dialogue requires someone willing to hold the space, stay factual, and resist the pull of whoever is loudest. That's a product management job, and one of the more important ones.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -495,10 +745,9 @@
   <!-- EXPERIENCE -->
   <section class="experience">
     <div class="section-header">
-      <span class="section-number">02</span>
+      <span class="section-number">03</span>
       <h2>Experience</h2>
     </div>
-
     <div class="exp-item">
       <div class="exp-meta">
         <div class="exp-date">Aug 2024 — Present</div>
@@ -506,14 +755,13 @@
       </div>
       <div class="exp-content">
         <h3>Lead Technical Product Manager</h3>
-        <p>Owned the data platform roadmap for a B2B loyalty SaaS serving 50+ enterprise clients. Launched BYOD adopted by 20+ customers. Selected to define org-wide product operating standards. Built an automated data catalog using AWS Glue. Directly contributed to the retention of 5+ key accounts and winning a major Australian grocery chain.</p>
+        <p>Owned the data platform roadmap for a B2B loyalty SaaS serving 50+ enterprise clients. Launched BYOD adopted by 20+ customers. Built automated data catalog using AWS Glue. Selected to define org-wide product operating standards. Directly contributed to retention of 5+ key accounts.</p>
         <span class="exp-tag">Data Lakehouse</span>
         <span class="exp-tag">Medallion Architecture</span>
         <span class="exp-tag">AWS Glue</span>
         <span class="exp-tag">BYOD</span>
       </div>
     </div>
-
     <div class="exp-item">
       <div class="exp-meta">
         <div class="exp-date">Mar 2022 — Aug 2024</div>
@@ -521,13 +769,12 @@
       </div>
       <div class="exp-content">
         <h3>Senior Product Manager</h3>
-        <p>Defined multi-year data strategy approved by Senior VP. Delivered $1M in annual cost savings through identifying redundant data storage and processing. Revitalised org-wide GDPR and data privacy frameworks, ensuring platform-wide compliance.</p>
+        <p>Defined multi-year data strategy approved by Senior VP. Delivered $1M in annual cost savings through identifying redundant data storage and processing. Revitalised org-wide GDPR and data privacy frameworks.</p>
         <span class="exp-tag">Data Strategy</span>
         <span class="exp-tag">GDPR</span>
         <span class="exp-tag">Cost Optimisation</span>
       </div>
     </div>
-
     <div class="exp-item">
       <div class="exp-meta">
         <div class="exp-date">Nov 2020 — Mar 2022</div>
@@ -541,7 +788,6 @@
         <span class="exp-tag">Vendor Management</span>
       </div>
     </div>
-
     <div class="exp-item">
       <div class="exp-meta">
         <div class="exp-date">Dec 2018 — Nov 2020</div>
@@ -549,13 +795,12 @@
       </div>
       <div class="exp-content">
         <h3>Product Owner / Manager — Procurement Platforms</h3>
-        <p>Managed the RadixOne SaaS roadmap from MVP through iterative scaling. Designed and launched Alma, an AI-powered chatbot scaled to five enterprise clients. Led Agile ceremonies and global enablement sessions.</p>
+        <p>Managed RadixOne SaaS roadmap from MVP through iterative scaling. Designed and launched Alma, an AI-powered chatbot scaled to five enterprise clients.</p>
         <span class="exp-tag">AI Chatbot</span>
         <span class="exp-tag">SaaS</span>
         <span class="exp-tag">Agile</span>
       </div>
     </div>
-
     <div class="exp-item">
       <div class="exp-meta">
         <div class="exp-date">2015 — Dec 2018</div>
@@ -563,7 +808,7 @@
       </div>
       <div class="exp-content">
         <h3>Product & Business Analyst → HR Functional Consultant</h3>
-        <p>EMEA lead for a global procurement suite — translating regional requirements into technical specifications. Prior: functional SME on a global Workday HCM rollout, bridging HR requirements with technical configurations.</p>
+        <p>EMEA lead for a global procurement suite. Prior: functional SME on a global Workday HCM rollout, bridging HR requirements with technical configurations.</p>
         <span class="exp-tag">Workday HCM</span>
         <span class="exp-tag">Procurement</span>
         <span class="exp-tag">Data Migration</span>
@@ -574,7 +819,7 @@
   <!-- SKILLS -->
   <section class="skills-section">
     <div class="section-header">
-      <span class="section-number">03</span>
+      <span class="section-number">04</span>
       <h2>Skills</h2>
     </div>
     <div class="skills-grid">
@@ -623,6 +868,26 @@
   <span>+420 720 057 442</span>
   <a href="https://linkedin.com/in/timothy-miller-74a460137" target="_blank" rel="noopener">LinkedIn</a>
 </footer>
+
+<script>
+  function toggleCS(id) {
+    const card = document.getElementById(id);
+    const body = card.querySelector('.cs-body');
+    const isOpen = card.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.cs-card').forEach(c => {
+      c.classList.remove('open');
+      c.querySelector('.cs-body').style.maxHeight = '0';
+    });
+
+    // Open clicked if it wasn't already open
+    if (!isOpen) {
+      card.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+</script>
 
 </body>
 </html>
